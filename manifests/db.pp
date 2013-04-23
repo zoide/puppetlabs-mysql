@@ -72,7 +72,7 @@ define mysql::db (
 
     if $sql {
       exec{ "${name}-import":
-        command     => "/usr/bin/mysql ${name} < ${sql}",
+        command     => "/usr/bin/mysql -u ${user} -p${password} ${name} < ${sql}",
         logoutput   => true,
         refreshonly => $refresh,
         require     => Database_grant["${user}@${host}/${name}"],
